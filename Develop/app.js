@@ -36,6 +36,29 @@ const managerQuestions = [
     }
 ];
 
+const engineerQuestions = [
+    {
+        type:"input",
+        message:"What is your name?",
+        name:"userName"
+    },
+    {
+        type:"input",
+        message:"What is your employee id?",
+        name:"id"
+    },
+    {
+        type:"input",
+        message:"What is your email addy?",
+        name:"email"
+    },
+    {
+        type:"input",
+        message:"What is you GitHub username (no '@' needed)?",
+        name:"githubUser"
+    }
+];
+
 function promptUser(){
     return inquirer.prompt([
         {
