@@ -15,4 +15,4 @@ class Intern extends Employee{
         console.log("Intern");
     }
 };
-modules.export = Intern;
+module.exports = Intern;
