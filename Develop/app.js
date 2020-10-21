@@ -15,80 +15,105 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 const managerQuestions = [
     {
-        type:"input",
-        message:"What is your name?",
-        name:"userName"
+        type: "input",
+        message: "What is your name?",
+        name: "userName"
     },
     {
-        type:"input",
-        message:"What is your employee id?",
-        name:"id"
+        type: "input",
+        message: "What is your employee id?",
+        name: "id"
     },
     {
-        type:"input",
-        message:"What is your email addy?",
-        name:"email"
+        type: "input",
+        message: "What is your email addy?",
+        name: "email"
     },
     {
-        type:"input",
-        message:"What is your Office Number?",
-        name:"officeNumber"
+        type: "input",
+        message: "What is your Office Number?",
+        name: "officeNumber"
     }
 ];
 
 const engineerQuestions = [
     {
-        type:"input",
-        message:"What is your name?",
-        name:"userName"
+        type: "input",
+        message: "What is your name?",
+        name: "userName"
     },
     {
-        type:"input",
-        message:"What is your employee id?",
-        name:"id"
+        type: "input",
+        message: "What is your employee id?",
+        name: "id"
     },
     {
-        type:"input",
-        message:"What is your email addy?",
-        name:"email"
+        type: "input",
+        message: "What is your email addy?",
+        name: "email"
     },
     {
-        type:"input",
-        message:"What is you GitHub username (no '@' needed)?",
-        name:"githubUser"
+        type: "input",
+        message: "What is you GitHub username (no '@' needed)?",
+        name: "githubUser"
     }
 ];
 
 const internQuestions = [
     {
-        type:"input",
-        message:"What is your name?",
-        name:"userName"
+        type: "input",
+        message: "What is your name?",
+        name: "userName"
     },
     {
-        type:"input",
-        message:"What is your employee id?",
-        name:"id"
+        type: "input",
+        message: "What is your employee id?",
+        name: "id"
     },
     {
-        type:"input",
-        message:"What is your email addy?",
-        name:"email"
+        type: "input",
+        message: "What is your email addy?",
+        name: "email"
     },
     {
-        type:"input",
-        message:"What school did you go to?",
-        name:"school"
+        type: "input",
+        message: "What school did you go to?",
+        name: "school"
     }
 ];
 
-function promptUser(){
+function promptUser(answers) {
     return inquirer.prompt([
         {
+            type: "list",
+            message: "Choose your role from the list",
+            name: "role",
+            choices: ['Manager', 'Engineer', 'Intern']
+        }, function whichQuestions() {
+            if (answers.role === 'Manager') {
+                return inquirer.prompt(
+                    [
+                        managerQuestions
+                    ]
+                )
+            } else if (answers.role === 'Engineer') {
+                return inquirer.prompt(
+                    [
+                        engineerQuestions
+                    ]
+                )
+            } else if (answers.role === 'Intern') {
+                return inquirer.prompt(
+                    [
+                        internQuestions
+                    ]
+                )
+            } else return;
 
         }
     ])
-}
+};
+promptUser();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
