@@ -59,6 +59,29 @@ const engineerQuestions = [
     }
 ];
 
+const internQuestions = [
+    {
+        type:"input",
+        message:"What is your name?",
+        name:"userName"
+    },
+    {
+        type:"input",
+        message:"What is your employee id?",
+        name:"id"
+    },
+    {
+        type:"input",
+        message:"What is your email addy?",
+        name:"email"
+    },
+    {
+        type:"input",
+        message:"What school did you go to?",
+        name:"school"
+    }
+];
+
 function promptUser(){
     return inquirer.prompt([
         {
