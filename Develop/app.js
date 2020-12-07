@@ -13,6 +13,14 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+const type = 
+    {
+        type: "list",
+        message: "Choose a role from the list",
+        name: "role",
+        choices: ['Manager', 'Engineer', 'Intern']
+    };
+
 const sameQuestions = [
     {
         type: "input",
@@ -50,96 +58,34 @@ const internQuestion = {
         message: "What school did you go to?",
         name: "school"
     };
+const workers = [];
+let newWorker;
+async function promptUser() {
+    try{
+        const sameQs = await inquirer.prompt(sameQuestions);
+        const eType = await inquirer.prompt(type);
 
-function promptUser(answers) {
-    return inquirer.prompt([
-        {
-            type: "list",
-            message: "Choose a role from the list",
-            name: "role",
-            choices: ['Manager', 'Engineer', 'Intern']
+        if (eType.role == "Manager"){
+            let singleQ = await inquirer.prompt(managerQuestion)
+            newWorker = new Manager(sameQs.userName, sameQs.id, sameQs.email, singleQ.officeNumber);
+            workers.push(newWorker);
         }
-        // , function whichQuestions() {
-        //     if (answers.role === 'Manager') {
-        //         return inquirer.prompt(
-        //             [
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your name?",
-        //                     name: "userName"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your employee id?",
-        //                     name: "id"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your email addy?",
-        //                     name: "email"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your Office Number?",
-        //                     name: "officeNumber"
-        //                 }
-        //             ]
-        //         )
-        //     } else if (answers.role === 'Engineer') {
-        //         return inquirer.prompt(
-        //             [
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your name?",
-        //                     name: "userName"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your employee id?",
-        //                     name: "id"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your email addy?",
-        //                     name: "email"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is you GitHub username (no '@' needed)?",
-        //                     name: "githubUser"
-        //                 }
-        //             ]
-        //         )
-        //     } else if (answers.role === 'Intern') {
-        //         return inquirer.prompt(
-        //             [
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your name?",
-        //                     name: "userName"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your employee id?",
-        //                     name: "id"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What is your email addy?",
-        //                     name: "email"
-        //                 },
-        //                 {
-        //                     type: "input",
-        //                     message: "What school did you go to?",
-        //                     name: "school"
-        //                 }
-        //             ]
-        //         )
-        //     } else return;
+        else if (eType.role == "Engineer"){
+            let singleQ =await inquirer.prompt(engineerQuestion)
+            newWorker = new Engineer(sameQs.userName, sameQs.id, sameQs.email, singleQ.githubUser);
+            workers.push(newWorker);
+        }
+        else{
+            let singleQ = await inquirer.prompt(internQuestion)
+            newWorker = new Intern(sameQs.username, sameQs.id, sameQs.email, singleQ.school);
+            workers.push(newWorker);
+        }
+        fs.writeFileSync(outputPath, render(workers));
+    }catch(err){
+        console.log(err);
+    }
 
-        // }
-    ])
-};
+}
 promptUser();
 
 // After the user has input all employees desired, call the `render` function (required
