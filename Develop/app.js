@@ -25,7 +25,7 @@ const sameQuestions = [
     {
         type: "input",
         message: "What is your name?",
-        name: "userName"
+        name: "name"
     },
     {
         type: "input",
@@ -67,17 +67,17 @@ async function promptUser() {
 
         if (eType.role == "Manager"){
             let singleQ = await inquirer.prompt(managerQuestion)
-            newWorker = new Manager(sameQs.userName, sameQs.id, sameQs.email, singleQ.officeNumber);
+            newWorker = new Manager(sameQs.name, sameQs.id, sameQs.email, singleQ.officeNumber);
             workers.push(newWorker);
         }
         else if (eType.role == "Engineer"){
             let singleQ =await inquirer.prompt(engineerQuestion)
-            newWorker = new Engineer(sameQs.userName, sameQs.id, sameQs.email, singleQ.githubUser);
+            newWorker = new Engineer(sameQs.name, sameQs.id, sameQs.email, singleQ.githubUser);
             workers.push(newWorker);
         }
         else{
             let singleQ = await inquirer.prompt(internQuestion)
-            newWorker = new Intern(sameQs.username, sameQs.id, sameQs.email, singleQ.school);
+            newWorker = new Intern(sameQs.name, sameQs.id, sameQs.email, singleQ.school);
             workers.push(newWorker);
         }
         fs.writeFileSync(outputPath, render(workers));
