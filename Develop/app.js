@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const managerQuestions = [
+const sameQuestions = [
     {
         type: "input",
         message: "What is your name?",
@@ -28,89 +28,116 @@ const managerQuestions = [
         type: "input",
         message: "What is your email addy?",
         name: "email"
-    },
+    }
+];
+
+const managerQuestion = 
     {
         type: "input",
         message: "What is your Office Number?",
         name: "officeNumber"
-    }
-];
+    };
 
-const engineerQuestions = [
-    {
-        type: "input",
-        message: "What is your name?",
-        name: "userName"
-    },
-    {
-        type: "input",
-        message: "What is your employee id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your email addy?",
-        name: "email"
-    },
+const engineerQuestion = 
     {
         type: "input",
         message: "What is you GitHub username (no '@' needed)?",
         name: "githubUser"
-    }
-];
+    };
 
-const internQuestions = [
-    {
-        type: "input",
-        message: "What is your name?",
-        name: "userName"
-    },
-    {
-        type: "input",
-        message: "What is your employee id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your email addy?",
-        name: "email"
-    },
-    {
+const internQuestion = {
         type: "input",
         message: "What school did you go to?",
         name: "school"
-    }
-];
+    };
 
 function promptUser(answers) {
     return inquirer.prompt([
         {
             type: "list",
-            message: "Choose your role from the list",
+            message: "Choose a role from the list",
             name: "role",
             choices: ['Manager', 'Engineer', 'Intern']
-        }, function whichQuestions() {
-            if (answers.role === 'Manager') {
-                return inquirer.prompt(
-                    [
-                        managerQuestions
-                    ]
-                )
-            } else if (answers.role === 'Engineer') {
-                return inquirer.prompt(
-                    [
-                        engineerQuestions
-                    ]
-                )
-            } else if (answers.role === 'Intern') {
-                return inquirer.prompt(
-                    [
-                        internQuestions
-                    ]
-                )
-            } else return;
-
         }
+        // , function whichQuestions() {
+        //     if (answers.role === 'Manager') {
+        //         return inquirer.prompt(
+        //             [
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your name?",
+        //                     name: "userName"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your employee id?",
+        //                     name: "id"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your email addy?",
+        //                     name: "email"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your Office Number?",
+        //                     name: "officeNumber"
+        //                 }
+        //             ]
+        //         )
+        //     } else if (answers.role === 'Engineer') {
+        //         return inquirer.prompt(
+        //             [
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your name?",
+        //                     name: "userName"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your employee id?",
+        //                     name: "id"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your email addy?",
+        //                     name: "email"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is you GitHub username (no '@' needed)?",
+        //                     name: "githubUser"
+        //                 }
+        //             ]
+        //         )
+        //     } else if (answers.role === 'Intern') {
+        //         return inquirer.prompt(
+        //             [
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your name?",
+        //                     name: "userName"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your employee id?",
+        //                     name: "id"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What is your email addy?",
+        //                     name: "email"
+        //                 },
+        //                 {
+        //                     type: "input",
+        //                     message: "What school did you go to?",
+        //                     name: "school"
+        //                 }
+        //             ]
+        //         )
+        //     } else return;
+
+        // }
     ])
 };
 promptUser();
